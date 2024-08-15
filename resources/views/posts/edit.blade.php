@@ -10,12 +10,12 @@
         {{-- el names el t7t de el habtdi 2st3mlha 34an 2get el values beta3 kol input 2w radio --}}
         <div class="form-group">
             <label for="exampleInputTitle">Title</label>
-            <input name="title" type="text" class="form-control" id="exampleInputTitle" value={{ old('desc', $post->title ?? '') }}> 
+            <input name="title" type="text" class="form-control" id="exampleInputTitle" value="{{$post->title}}"> 
         </div>
         <br>
         <div class="form-group">
             <label for="exampleFormControlTextarea1">Description</label>
-            <textarea name="desc" class="form-control" id="exampleFormControlTextarea1" rows="3">{{ old('desc', $post->description ?? '') }}</textarea>
+            <textarea name="desc" class="form-control" id="exampleFormControlTextarea1" rows="3">{{ $post->description}}</textarea>
         </div>
         <br>
 

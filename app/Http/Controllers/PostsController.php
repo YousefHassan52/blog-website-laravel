@@ -18,7 +18,7 @@ class PostsController extends Controller
         $dbObject = Post::all();
         // dd($dbObject);
 
-        return view('posts.index', ['sentence' => $sentence, 'articles' => $dbObject]);
+        return view('posts.index', ['sentence' => $sentence, 'posts' => $dbObject]);
     }
 
     public function show(Post $postId) // it doeasnt matter the name of the parameter 

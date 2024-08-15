@@ -24,17 +24,17 @@
         </tr>
       </thead>
       <tbody>
-        @foreach ($articles as $article)
+        @foreach ($posts as $post)
              <tr>
-          <th scope="row">{{$article['id']}}</th>
-          <td>{{$article->title}}</td>
-          <td>{{$article->posted_by}}</td>
-          <td>{{$article->created_at}}</td>
+          <th scope="row">{{$post->id}}</th>
+          <td>{{$post->title}}</td>
+          <td>{{$post->posted_by}}</td>
+          <td>{{$post->created_at}}</td>
           <td>
-            <a href="{{route('posts.show',$article->id)}}"  class="btn btn-info">View</a>{{--lw 3ayez te pass more than url parameter put them in associative array and the key must be the same as the url parameter in route (web.php file) --}}
-            <a href="{{route('posts.edit',$article->id)}}" class="btn btn-primary">Edit</a>
+            <a href="{{route('posts.show',$post->id)}}"  class="btn btn-info">View</a>{{--lw 3ayez te pass more than url parameter put them in associative array and the key must be the same as the url parameter in route (web.php file) --}}
+            <a href="{{route('posts.edit',$post->id)}}" class="btn btn-primary">Edit</a>
            
-           <form style="display: inline" action="{{route('posts.destroy',$article->id)}}" method="POST">
+           <form style="display: inline" action="{{route('posts.destroy',$post->id)}}" method="POST">
             @csrf
             @method('DELETE')
             <button   type="submit" class="btn btn-danger">Delete</button>
