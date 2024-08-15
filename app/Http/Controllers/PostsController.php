@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Post;
+use App\Models\User;
 
 class PostsController extends Controller
 {
@@ -66,7 +67,13 @@ class PostsController extends Controller
     }
     public function create()
     {
-        return view("posts.create");
+        $usersFromDB = User::all();
+        // $result = '';
+        // foreach ($usersFromDB as $user) {
+        //     $result .= $user->name . " ";
+        // }
+        // return $result;
+        return view("posts.create", ['users' => $usersFromDB]);
     }
     public function store()
     {
@@ -79,20 +86,17 @@ class PostsController extends Controller
         // return $data;
 
         // second laravel way
-        $data = request()->all(); // return associative array 
+        $data = request(); // return associative array 
+        $title = $data->title;
+        $desc = $data->desc;
 
-        // $t = $data->title; // ->title 34an heya 2smha kda fe el html
-        // $description = $data->desc; // ->desc 34an 2na mesameha fe el html keda 
-        // $user = $data->creator; // ->creator 34an 2na mesameha fe el html keda name="creator"
-        // $title = request()->input('desc'); zy el fo2 belzabt bs be 4akl tani
+        // first way in storing record to database 
 
-        if (request()->filled('title')) {
-            $title = $data["title"];
-            return $title;
-        } else
-            return "titlle is null";
-
-        // return to_route('posts.index');
+        $post = new Post;
+        $post->title = $title;
+        $post->description = $desc;
+        $post->save();
+        return to_route('posts.index');
     }
     public function edit($id)
     {

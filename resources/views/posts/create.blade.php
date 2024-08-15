@@ -19,9 +19,11 @@
 
         <label for="postCreator">Post Creator</label>
         <select name="creator" class="form-control" id="postCreator">
-            <option value="Ahmed">Ahmed</option>
-            <option value="Mohammed">Mohammed</option>
-            <option value="Alaa">Alaa</option>
+            @foreach ($users as $user)
+            <option value="{{$user->name}}">{{$user->name}}</option>
+
+                
+            @endforeach
         </select>
         <br> 
         <button type="submit" class="btn btn-success">Submit</button>    
