@@ -1,29 +1,31 @@
 @extends('layouts.app')
-   @section("title") Create Post @endsection
+   @section("title") Edit Post @endsection
 @section('content')
 
-    <form action="{{route('posts.update',$post['id'])}}" method="POST" >
+    <form action="{{route('posts.update',$post->id)}}" method="POST" >
         @csrf
         @method('PUT')
-        <h1>{{$post['title']}}</h1>
+        <h1>{{$post->title}}</h1>
 
         {{-- el names el t7t de el habtdi 2st3mlha 34an 2get el values beta3 kol input 2w radio --}}
         <div class="form-group">
             <label for="exampleInputTitle">Title</label>
-            <input name="title" type="text" class="form-control" id="exampleInputTitle" value={{ old('desc', $post['title'] ?? '') }}> 
+            <input name="title" type="text" class="form-control" id="exampleInputTitle" value={{ old('desc', $post->title ?? '') }}> 
         </div>
         <br>
         <div class="form-group">
             <label for="exampleFormControlTextarea1">Description</label>
-            <textarea name="desc" class="form-control" id="exampleFormControlTextarea1" rows="3">{{ old('desc', $post['desc'] ?? '') }}</textarea>
+            <textarea name="desc" class="form-control" id="exampleFormControlTextarea1" rows="3">{{ old('desc', $post->description ?? '') }}</textarea>
         </div>
         <br>
 
         <label for="postCreator">Post Creator</label>
         <select name="creator" class="form-control" id="postCreator">
-            <option value="Ahmed">Ahmed</option>
-            <option value="Mohammed">Mohammed</option>
-            <option value="Alaa">Alaa</option>
+            @foreach ($users as $user)
+            <option value="{{$user->name}}">{{$user->name}}</option>
+
+            
+            @endforeach
         </select>
         <br> 
         <button type="submit" class="btn btn-primary">Update</button>    

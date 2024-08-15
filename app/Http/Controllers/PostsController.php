@@ -10,29 +10,7 @@ use App\Models\User;
 class PostsController extends Controller
 {
 
-    private $post = [
-        [
-            'id' => 1,
-            'title' => 'Introduction to PHP',
-            'posted_by' => 'John Doe',
-            'created_at' => '2024-07-31 10:00:00',
-            'desc' => 'This post provides an overview of PHP, a popular server-side scripting language used for web development. You will learn about PHP syntax, basic programming constructs, and how to start creating dynamic web pages.'
-        ],
-        [
-            'id' => 2,
-            'title' => 'Advanced Laravel Techniques',
-            'posted_by' => 'Alice Johnson',
-            'created_at' => '2024-07-31 11:00:00',
-            'desc' => 'In this post, we delve into advanced Laravel techniques, including service containers, dependency injection, and custom package development. Perfect for developers looking to enhance their Laravel skills.'
-        ],
-        [
-            'id' => 3,
-            'title' => 'Understanding Arrays in PHP',
-            'posted_by' => 'Charlie Lee',
-            'created_at' => '2024-07-31 12:00:00',
-            'desc' => 'Arrays are a fundamental data structure in PHP. This post explains different types of arrays, how to create them, and how to manipulate array elements using built-in PHP functions.'
-        ]
-    ];
+
 
     public function index()
     {
@@ -109,22 +87,27 @@ class PostsController extends Controller
     }
     public function edit($id)
     {
-
-        if ($id < 1) {
-            $id = 1;
-        } else if ($id > count($this->post) - 1) {
-            $id = count($this->post);
-        }
-        return view('posts.edit', ['post' => $this->post[$id - 1]]);
+        $usersFromDb = User::all();
+        $postFromDB = Post::find($id);
+        return view('posts.edit', ['post' => $postFromDB, 'users' => $usersFromDb]);
     }
-    public function update($id)
+    public function update(Post $post)
     {
-        // return "this is update function";
-        // return $this->post[$id]['title'];
-        return to_route('posts.show', $id);
+        $data = request();
+
+        $post->update([
+            'title' => $data->title,
+            'description' => $data->desc,
+        ]);
+
+
+
+        return to_route('posts.show', $post->id);
     }
     public function destroy($id)
     {
+        $post = Post::find($id);
+        $post->delete();
 
         // return "post with id " . $id . " is deleted";
         return to_route('posts.index');

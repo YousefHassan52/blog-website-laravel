@@ -16,7 +16,7 @@
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">#</th>
+          <th scope="col">Post ID</th>
           <th scope="col">Title</th>
           <th scope="col">Posted By</th>
           <th scope="col">Created At</th>
