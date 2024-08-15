@@ -42,7 +42,7 @@ class PostsController extends Controller
         return view('posts.index', ['sentence' => $sentence, 'articles' => $dbObject]);
     }
 
-    public function show($id) // it doeasnt matter the name of the parameter 
+    public function show(Post $postId) // it doeasnt matter the name of the parameter 
     {
         /*
             route model binding hatwfar 3lek 7ata ketabet el query + 2nha hathndel el 404 error 
@@ -56,13 +56,13 @@ class PostsController extends Controller
 
 
 
-        $postFromDB = Post::find($id);
+        // $postFromDB = Post::find($id);
         // $postFromDB = Post::where('id', $id);
         // $postFromDB = Post::where('title', "c++ intro")->first();
-        if ($postFromDB == null) {
-            return view('posts.not_found');
-        }
-        return view('posts.show', ['post' => $postFromDB]);
+        // if ($postFromDB == null) {
+        //     return view('posts.not_found');
+        // }
+        return view('posts.show', ['post' => $postId]); // fe el 7ala de howa m4 id howa Post model
     }
     public function create()
     {
