@@ -89,13 +89,22 @@ class PostsController extends Controller
         $data = request(); // return associative array 
         $title = $data->title;
         $desc = $data->desc;
+        $creator = $data->creator;
 
         // first way in storing record to database 
 
-        $post = new Post;
-        $post->title = $title;
-        $post->description = $desc;
-        $post->save();
+        // $post = new Post;
+        // $post->title = $title;
+        // $post->description = $desc;
+        // $post->save();
+
+        // second way
+        // lazem 2stdem el $fillable parameter fe el model we 25leh yesway array of all the pramaters el 2nta3yazha tetmli fe el database
+        Post::create([
+            "title" => $title,
+            "description" => $desc,
+            "sdkfj" => $creator // lw el attribute dh m4 mawgod fe el table ha ignore it we 2store ba2et el attributes 3ady 
+        ]);
         return to_route('posts.index');
     }
     public function edit($id)
