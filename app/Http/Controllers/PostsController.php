@@ -51,7 +51,6 @@ class PostsController extends Controller
                 2- 2n yekon el passed parameter fe el function el 2na feha (el bakteb feha el comment dh) no3o nafs no3 el model el 2nta btst5demo f eel controller dh (we fe el 7ala de hayb2a Post model)
                 
         */
-        //
 
 
 
