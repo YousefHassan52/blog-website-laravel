@@ -10,7 +10,7 @@
           <span class="badge bg-secondary">{{$post->created_at}}</span>
         </div>
         <div class="card-body">
-          <h6 class="card-subtitle mb-2 text-muted">Posted by: {{$post['posted_by']}}</h6>
+          <h6 class="card-subtitle mb-2 text-muted">Posted by: {{$post->user->name}}</h6>
           <p class="card-text mt-3">{{$post->description}}</p>
           <a href="{{route('posts.index')}}" class="btn btn-outline-primary mt-3">Back to Posts</a>
         </div>

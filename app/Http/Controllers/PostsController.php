@@ -100,6 +100,7 @@ class PostsController extends Controller
         $post->update([
             'title' => $data->title,
             'description' => $data->desc,
+            'user_id' => $data->creator,
         ]);
 
 

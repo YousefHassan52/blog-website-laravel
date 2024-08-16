@@ -16,6 +16,7 @@ class Post extends Model
 
     ];
 
+    // lazem teltzem bel tasmya zy ma 2na katebha ya 2ma tktb el foreign_key el 2nta hat4t8al 3leh
     public function user()
     {
         return $this->belongsTo(User::class); // 34an bs 2a2dar 2kteb post->user->name 
