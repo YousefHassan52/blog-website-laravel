@@ -21,4 +21,9 @@ class Post extends Model
     {
         return $this->belongsTo(User::class); // 34an bs 2a2dar 2kteb post->user->name 
     }
+    // de el tare2a el tanya lw hat8yar 2y 7aga fe el tasmya 2za kan 2esm el foreign key fe el table 2w 7ta 2esm el fucntion
+    public function postCreator()
+    {
+        return   $this->belongsTo(User::class, 'user_id');
+    }
 }
