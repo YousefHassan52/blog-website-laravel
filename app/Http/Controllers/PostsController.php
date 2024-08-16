@@ -16,6 +16,8 @@ class PostsController extends Controller
     {
         $sentence = '    Very little is needed to make a happy life. - Marcus Aurelius ';
         $dbObject = Post::all();
+
+
         // dd($dbObject);
 
         return view('posts.index', ['sentence' => $sentence, 'posts' => $dbObject]);
@@ -81,7 +83,7 @@ class PostsController extends Controller
         Post::create([
             "title" => $title,
             "description" => $desc,
-            "sdkfj" => $creator // lw el attribute dh m4 mawgod fe el table ha ignore it we 2store ba2et el attributes 3ady 
+            "user_id" => $creator // lw el attribute dh m4 mawgod fe el table ha ignore it we 2store ba2et el attributes 3ady 
         ]);
         return to_route('posts.index');
     }

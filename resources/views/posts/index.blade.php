@@ -28,7 +28,7 @@
              <tr>
           <th scope="row">{{$post->id}}</th>
           <td>{{$post->title}}</td>
-          <td>{{$post->posted_by}}</td>
+          <td>{{$post->user->name}}</td>
           <td>{{$post->created_at}}</td>
           <td>
             <a href="{{route('posts.show',$post->id)}}"  class="btn btn-info">View</a>{{--lw 3ayez te pass more than url parameter put them in associative array and the key must be the same as the url parameter in route (web.php file) --}}

@@ -20,7 +20,7 @@
         <label for="postCreator">Post Creator</label>
         <select name="creator" class="form-control" id="postCreator">
             @foreach ($users as $user)
-            <option value="{{$user->name}}">{{$user->name}}</option>
+            <option value="{{$user->id}}">{{$user->name}}</option>
 
                 
             @endforeach
