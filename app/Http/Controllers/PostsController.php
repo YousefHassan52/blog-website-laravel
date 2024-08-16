@@ -57,15 +57,12 @@ class PostsController extends Controller
     }
     public function store()
     {
-        //native way of getting data 
-        // $data = $_POST; // get data from form in html that have action with name = "posts.store"
-        // return $data;
-
-        // laravel way to get data as the previous way but with global helper function
-        // $data = request()->all();
-        // return $data;
-
-        // second laravel way
+        // validation part
+        request()->validate([
+            "title" => ["required", "min:3"],
+            "desc" => ["required", "min:3"],
+            "creator" => ["exists:users,id"],
+        ]);
         $data = request(); // return associative array 
         $title = $data->title;
         $desc = $data->desc;
@@ -89,12 +86,18 @@ class PostsController extends Controller
     }
     public function edit($id)
     {
+
         $usersFromDb = User::all();
         $postFromDB = Post::find($id);
         return view('posts.edit', ['post' => $postFromDB, 'users' => $usersFromDb]);
     }
     public function update(Post $post)
     {
+        request()->validate([
+            "title" => ["required", "min:3"],
+            "desc" => ["required", "min:3"],
+            "creator" => ["exists:users,id"],
+        ]);
         $data = request();
 
         $post->update([
