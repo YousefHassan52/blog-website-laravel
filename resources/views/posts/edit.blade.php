@@ -20,11 +20,12 @@
         <br>
 
         <label for="postCreator">Post Creator</label>
-        <select name="creator" class="form-control" id="postCreator">
+        <select name="creator" class="form-control" id="postCreator" >
             @foreach ($users as $user)
-                <option value="{{ $user->id }}" {{ $user->id == $post->user_id ? 'selected' : '' }}>
-                    {{ $user->name }}
-                </option>
+            {{-- lw la2et user mn lists el users el 2na ba3ethum el id beta3o bey_equal el post->user->id fa selected(its a word key) --}}
+            <option @if ($user->id==$post->user->id ) selected @endif value="{{$user->id}}">{{$user->name}}</option>
+
+            
             @endforeach
         </select>
         <br> 
