@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
 use App\Models\Post;
@@ -23,7 +24,7 @@ class PostsController extends Controller
         return view('posts.index', ['sentence' => $sentence, 'posts' => $dbObject]);
     }
 
-    public function show(Post $postId) // it doeasnt matter the name of the parameter 
+    public function show(Post $post) // it doeasnt matter the name of the parameter 
     {
         /*
             route model binding hatwfar 3lek 7ata ketabet el query + 2nha hathndel el 404 error 
@@ -32,6 +33,9 @@ class PostsController extends Controller
                 2- 2n yekon el passed parameter fe el function el 2na feha (el bakteb feha el comment dh) no3o nafs no3 el model el 2nta btst5demo f eel controller dh (we fe el 7ala de hayb2a Post model)
                 
         */
+
+
+        //$comments=Comment::all();
 
 
 
@@ -43,7 +47,9 @@ class PostsController extends Controller
         // if ($postFromDB == null) {
         //     return view('posts.not_found');
         // }
-        return view('posts.show', ['post' => $postId]); // fe el 7ala de howa m4 id howa Post model
+
+        $comments = Comment::where('post_id', $post->id)->get();
+        return view('posts.show', ['post' => $post, 'comments' => $comments]); // fe el 7ala de howa m4 id howa Post model
     }
     public function create()
     {

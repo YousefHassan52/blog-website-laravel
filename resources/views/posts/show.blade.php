@@ -15,4 +15,56 @@
           <a href="{{route('posts.index')}}" class="btn btn-outline-primary mt-3">Back to Posts</a>
         </div>
       </div>
+
+    <!-- Comments Section -->
+    <div class="mt-5">
+      <h5>Comments</h5>
+      @foreach($comments as $comment)
+          <div class="card mb-3">
+              <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                      <p class="card-text">{{ $comment->body }}</p>
+                      <div >
+                          <!-- Edit Button -->
+                          <a href="{{route('comments.edit',["post"=>$post,"comment"=>$comment])}}" class="btn btn-sm btn-outline-secondary">Edit</a>
+
+                          <!-- Delete Form -->
+                          <form action="{{route('comments.destroy',["post"=>$post,"comment"=>$comment])}}" method="POST" style="display:inline;">
+                           
+                               @csrf
+                              @method('DELETE') 
+                              <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                          </form>
+                      </div>
+                  </div>
+                  {{-- <footer class="blockquote-footer">{{ $comment->user->name }} on {{ $comment->created_at }}</footer> --}}
+              </div>
+          </div>
+      @endforeach
+  </div>
+
+      <div class="card mt-4">
+        <div class="card-body">
+            <form action="{{route('comments.store',$post)}}" method="POST">
+              {{-- m4 far2a b3t $post 2w $post->id --}}
+                @csrf
+            
+                <div class="form-group">
+                    <textarea class="form-control" name="body" rows="3" placeholder="Add a comment..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary mt-2">Submit Comment</button>
+            </form>
+            <br>
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+          </div>
+
 @endsection
