@@ -19,13 +19,19 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="{{route("posts.index")}}">All Posts</a>
+             
+
             </li>
             
            
            
           </ul>
-         
+                 @auth
+        <a href="{{ route('logout') }}" class="btn btn-danger">Logout</a>
+
+        @endauth
         </div>
+
       </div>
     </nav>
 

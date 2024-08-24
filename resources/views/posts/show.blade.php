@@ -2,6 +2,7 @@
 @extends("layouts.app")
 @section("title")Post {{$post->id}} @endsection
 @section("content")
+<h1>{{$loggedName}}</h1>
     <!-- Main Content -->
       <!-- Post Card -->
       <div class="card shadow-lg">

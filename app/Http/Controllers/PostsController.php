@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Post;
 use App\Models\User;
@@ -15,17 +16,20 @@ class PostsController extends Controller
 
     public function index()
     {
+        $logged_user = Auth::user()->email;
         $sentence = '    Very little is needed to make a happy life. - Marcus Aurelius ';
         $dbObject = Post::all();
 
 
         // dd($dbObject);
 
-        return view('posts.index', ['sentence' => $sentence, 'posts' => $dbObject]);
+        return view('posts.index', ['sentence' => $sentence, 'posts' => $dbObject, 'loggedName' => $logged_user]);
     }
 
     public function show(Post $post) // it doeasnt matter the name of the parameter 
     {
+        $logged_user = Auth::user()->email;
+
         /*
             route model binding hatwfar 3lek 7ata ketabet el query + 2nha hathndel el 404 error 
             bs leha 4erot:
@@ -49,7 +53,7 @@ class PostsController extends Controller
         // }
 
         $comments = Comment::where('post_id', $post->id)->get();
-        return view('posts.show', ['post' => $post, 'comments' => $comments]); // fe el 7ala de howa m4 id howa Post model
+        return view('posts.show', ['post' => $post, 'comments' => $comments, 'loggedName' => $logged_user]); // fe el 7ala de howa m4 id howa Post model
     }
     public function create()
     {

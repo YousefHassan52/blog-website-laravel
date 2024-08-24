@@ -2,7 +2,7 @@
    @section("title") Posts @endsection
 @section('content')
     
-
+<h1>{{$loggedName}}</h1>
       <div class="text-center">
         <div class="mt-5">  
           <div class="text-center"> 
