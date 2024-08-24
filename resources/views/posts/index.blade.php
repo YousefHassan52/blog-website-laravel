@@ -2,7 +2,6 @@
    @section("title") Posts @endsection
 @section('content')
     
-<h1>{{$loggedName}}</h1>
       <div class="text-center">
         <div class="mt-5">  
           <div class="text-center"> 
@@ -32,14 +31,17 @@
           <td>{{$post->created_at->addYears(15)->format("Y-m-d")}}</td>
           <td>
             <a href="{{route('posts.show',$post->id)}}"  class="btn btn-info">View</a>{{--lw 3ayez te pass more than url parameter put them in associative array and the key must be the same as the url parameter in route (web.php file) --}}
-            <a href="{{route('posts.edit',$post->id)}}" class="btn btn-primary">Edit</a>
-           
-           <form style="display: inline" action="{{route('posts.destroy',$post->id)}}" method="POST">
-            @csrf
-            @method('DELETE')
-            <button   type="submit" class="btn btn-danger">Delete</button>
+            @if ($loggedUser==$post->user_id)
+              <a href="{{route('posts.edit',$post->id)}}" class="btn btn-primary">Edit</a>
+              <form style="display: inline" action="{{route('posts.destroy',$post->id)}}" method="POST">
+              @csrf
+              @method('DELETE')
+              <button   type="submit" class="btn btn-danger">Delete</button>
 
-           </form>
+            </form>
+            @endif
+           
+           
 
           </td>
         </tr>

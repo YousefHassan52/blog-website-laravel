@@ -16,14 +16,14 @@ class PostsController extends Controller
 
     public function index()
     {
-        $logged_user = Auth::user()->email;
+        $logged_user = Auth::user()->id;
         $sentence = '    Very little is needed to make a happy life. - Marcus Aurelius ';
         $dbObject = Post::all();
 
 
         // dd($dbObject);
 
-        return view('posts.index', ['sentence' => $sentence, 'posts' => $dbObject, 'loggedName' => $logged_user]);
+        return view('posts.index', ['sentence' => $sentence, 'posts' => $dbObject, 'loggedUser' => $logged_user]);
     }
 
     public function show(Post $post) // it doeasnt matter the name of the parameter 
@@ -57,27 +57,26 @@ class PostsController extends Controller
     }
     public function create()
     {
-        $usersFromDB = User::all();
+
+        $user = Auth::user();
         // $result = '';
         // foreach ($usersFromDB as $user) {
         //     $result .= $user->name . " ";
         // }
         // return $result;
-        return view("posts.create", ['users' => $usersFromDB]);
+        return view("posts.create", ['user' => $user]);
     }
     public function store()
     {
+        $creator_id = Auth::user()->id;
         // validation part
         request()->validate([
             "title" => ["required", "min:3"],
             "desc" => ["required", "min:3"],
-            "creator" => ["exists:users,id"],
         ]);
         $data = request(); // return associative array 
         $title = $data->title;
         $desc = $data->desc;
-        $creator = $data->creator;
-
         // first way in storing record to database 
 
         // $post = new Post;
@@ -90,7 +89,7 @@ class PostsController extends Controller
         Post::create([
             "title" => $title,
             "description" => $desc,
-            "user_id" => $creator // lw el attribute dh m4 mawgod fe el table ha ignore it we 2store ba2et el attributes 3ady 
+            "user_id" => $creator_id // lw el attribute dh m4 mawgod fe el table ha ignore it we 2store ba2et el attributes 3ady 
         ]);
         return to_route('posts.index');
     }
@@ -106,14 +105,12 @@ class PostsController extends Controller
         request()->validate([
             "title" => ["required", "min:3"],
             "desc" => ["required", "min:3"],
-            "creator" => ["exists:users,id"],
         ]);
         $data = request();
 
         $post->update([
             'title' => $data->title,
             'description' => $data->desc,
-            'user_id' => $data->creator,
         ]);
 
 

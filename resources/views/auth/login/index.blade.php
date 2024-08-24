@@ -7,15 +7,7 @@
         <div class="col-md-6">
             <h2 class="mt-5">Login</h2>
 
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+
 
             <form method="POST" action="{{route('login.login')}}">
                 @csrf
@@ -30,6 +22,13 @@
                 <br>
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary w-100">Login</button>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6 offset-md-4">
+                        <a href="{{ route('register.index') }}" class="btn btn-link">
+                            {{ __('Dont have an account? Register') }}
+                        </a>
+                    </div>
                 </div>
             </form>
         </div>

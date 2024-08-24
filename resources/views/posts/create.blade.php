@@ -4,6 +4,7 @@
 
     <form action="{{route('posts.store')}}" method="POST" >
         @csrf
+        {{-- <h6>{{$user->name}}</h6> --}}
 
         {{-- el names el t7t de el habtdi 2st3mlha 34an 2get el values beta3 kol input 2w radio --}}
         <div class="form-group">
@@ -17,15 +18,7 @@
         </div>
         <br>
 
-        <label for="postCreator">Post Creator</label>
-        <select name="creator" class="form-control" id="postCreator" value="{{old('creator')}}" required>
-            @foreach ($users as $user)
-            <option value="{{$user->id}}">{{$user->name}}</option>
-
-                
-            @endforeach
-        </select>
-        <br> 
+        
         <button type="submit" class="btn btn-success">Submit</button>    
     </form>
     <br>

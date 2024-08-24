@@ -2,7 +2,7 @@
 @extends("layouts.app")
 @section("title")Post {{$post->id}} @endsection
 @section("content")
-<h1>{{$loggedName}}</h1>
+{{-- <h1>{{$loggedName}}</h1> --}}
     <!-- Main Content -->
       <!-- Post Card -->
       <div class="card shadow-lg">
@@ -23,8 +23,12 @@
       @foreach($comments as $comment)
           <div class="card mb-3">
               <div class="card-body">
+                <h5>{{$comment->user->name}}</h5>
+                
+
                   <div class="d-flex justify-content-between">
                       <p class="card-text">{{ $comment->body }}</p>
+                      @if($comment->commentator_id==Auth::user()->id)
                       <div >
                           <!-- Edit Button -->
                           <a href="{{route('comments.edit',["post"=>$post,"comment"=>$comment])}}" class="btn btn-sm btn-outline-secondary">Edit</a>
@@ -37,6 +41,8 @@
                               <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
                           </form>
                       </div>
+                      @endif
+                      
                   </div>
                   {{-- <footer class="blockquote-footer">{{ $comment->user->name }} on {{ $comment->created_at }}</footer> --}}
               </div>
