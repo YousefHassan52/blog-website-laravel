@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -48,3 +49,8 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 //register
 Route::get('/register', [RegisterController::class, 'index'])->name('register.index');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+
+
+
+// admin 
+Route::get('/admin', [AdminController::class, 'index'])->name("admin.index")->middleware(['auth', 'role:admin']); // sami el name zy ma 2nta 3ayez 3ady bs el 4akl dh howa el commonly used between developers

@@ -123,6 +123,10 @@ class PostsController extends Controller
         $post->delete();
 
         // return "post with id " . $id . " is deleted";
+        $userRole = Auth::user()->role;
+        if ($userRole == 'admin') {
+            return to_route('admin.index');
+        }
         return to_route('posts.index');
     }
 }
